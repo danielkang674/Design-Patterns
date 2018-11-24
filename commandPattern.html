@@ -1,0 +1,32 @@
+<script>
+  class ExponentialMath {
+    constructor(num) {
+      this._num = num;
+    }
+    square() {
+      return this._num ** 2;
+    }
+    cube() {
+      return this._num ** 3;
+    }
+    squareRoot() {
+      return Math.sqrt(this._num);
+    }
+  };
+
+  class Command {
+    constructor(subject) {
+      let _subject = subject;
+      this.commandsExecuted = [];
+      this.execute = (command) => {
+        this.commandsExecuted.push(command);
+        return _subject[command]();
+      }
+    }
+  };
+
+  const x = new Command(new ExponentialMath(3));
+  console.log(x.execute('cube'));
+  console.log(x.execute('square'));
+  console.log(x._subject); // private variable will result in undefined
+</script>
