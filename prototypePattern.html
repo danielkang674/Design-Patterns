@@ -1,0 +1,55 @@
+<script>
+  function Car(model, year, miles) {
+    this.model = model;
+    this.year = year;
+    this.miles = miles;
+    this.engine = 'gas';
+  };
+
+  Car.prototype.toString = function () {
+    return `${this.model} has done ${this.miles} miles`
+  };
+
+  function Prius(model, year, miles) {
+    Car.call(this);
+    this.model = model;
+    this.year = year;
+    this.miles = miles;
+    this.engine = 'electric';
+  }
+
+  Prius.prototype = Object.create(Car.prototype);
+  Prius.prototype.constructor = Prius;
+
+  const civic = new Car('Honda Civic', 1991, 90000);
+  const prius = new Prius('Toyota Prius', 2001, 50000);
+
+  console.log(civic.toString());
+  console.log(civic.engine, civic.year);
+  console.log(prius.toString());
+  console.log(prius.engine, prius.year);
+
+  class Truck {
+    constructor() {
+      this.tires = 4;
+      this.engine = 'v8';
+      this.seats = 2;
+    }
+
+    honk() {
+      console.log('BEEP BEEP MOVE!');
+    }
+  };
+
+  class FourRunner extends Truck {
+    constructor(model) {
+      super(model);
+      this.model = model;
+      this.seats = 4;
+    }
+  };
+
+  const fourRunner = new FourRunner('4 Runner');
+  console.log(fourRunner);
+  fourRunner.honk();
+</script>

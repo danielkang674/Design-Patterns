@@ -13,3 +13,4 @@ const corolla = new Car('Toyota Corolla', 2001, 50000);
 
 console.log(civic.toString());
 console.log(corolla.toString());
+console.log(civic.constructor);
