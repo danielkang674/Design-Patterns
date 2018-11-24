@@ -1,0 +1,57 @@
+<script>
+  class Publisher {
+    constructor() {
+      this.subscribers = [];
+    }
+    addSubscriber(subscriber) {
+      this.subscribers.push(subscriber)
+    }
+    removeSubscriber(subscriber) {
+      this.subscribers = this.subscribers.filter(sub => sub !== subscriber);
+    }
+    fire(action) {
+      this.subscribers.forEach(sub => sub.update(action));
+    }
+  };
+
+  class Subscriber {
+    constructor(state = 0) {
+      this.state = state;
+    }
+    update(action) {
+      let state = this.state;
+      switch (action) {
+        case 'INC':
+          this.state = ++state;
+          break;
+        case 'DEC':
+          this.state = --state;
+          break;
+        default:
+          this.state = this.state;
+      }
+    }
+  };
+
+  const pub = new Publisher();
+  const sub1 = new Subscriber();
+  const sub2 = new Subscriber(10);
+
+  pub.addSubscriber(sub1);
+  pub.addSubscriber(sub2);
+
+  pub.fire('INC');
+  pub.fire('INC');
+
+  console.log(sub1.state);
+  console.log(sub2.state);
+
+  pub.removeSubscriber(sub1);
+
+  pub.fire('DEC');
+  pub.fire('DEC');
+  pub.fire('DEC');
+
+  console.log(sub1.state);
+  console.log(sub2.state);
+</script>
