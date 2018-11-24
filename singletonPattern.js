@@ -51,6 +51,7 @@ const rnd = () => {
     };
     let privateVar = 'This is a private var';
     let privateNum = Math.random();
+    let privData = data;
     return {
       publicMethod() {
         console.log('Public can see me');
@@ -60,8 +61,11 @@ const rnd = () => {
         return privateNum;
       },
       getData() {
-        return data;
-      }
+        return privData;
+      },
+      setData(data) {
+        privData = data;
+      },
     }
   };
   return {
@@ -80,4 +84,7 @@ console.log(a.getRandomNumber());
 console.log(a.getData());
 const b = rndConstructor.getInstance('b');
 console.log(b.getRandomNumber());
+console.log(b.getData());
+a.setData('c');
+console.log(a.getData());
 console.log(b.getData());
